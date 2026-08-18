@@ -1,0 +1,4437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Level Up with Niisie | Personal Development & Tech</title>
+
+<meta name="description"
+content="Hey, I'm Niisie — a South African student sharing my journey in coding, personal growth, web development, cybersecurity, chess and self-improvement.">
+
+<meta name="keywords"
+content="Niisie, Nemakhavhani Nisikhangwe, South African developer, web development, coding, cybersecurity, technology, chess">
+
+<meta name="author" content="Nemakhavhani Nisikhangwe">
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://yourwebsite.com/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+  --neon: #00ff99;
+  --neon-light: #00ffcc;
+
+  --bg: #050805;
+  --card: #101410;
+
+  --text: #f0f0f0;
+  --muted: #a0aaa4;
+
+  --border: rgba(0,255,153,0.14);
+
+  --shadow:
+    0 10px 40px rgba(0,0,0,0.55);
+}
+
+[data-theme="light"] {
+  --bg: #f8f9fa;
+  --card: #ffffff;
+
+  --text: #1a1a1a;
+  --muted: #555;
+
+  --border: rgba(0,0,0,0.08);
+
+  --neon: #00a968;
+  --neon-light: #00c982;
+
+  --shadow:
+    0 10px 40px rgba(0,0,0,0.08);
+}
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 25px;
+}
+
+body {
+  font-family: 'Poppins', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  padding-bottom: 40px;
+
+  transition:
+    background .4s ease,
+    color .4s ease;
+
+  position: relative;
+  overflow-x: hidden;
+}
+
+.page {
+  max-width: 1100px;
+  margin: 28px auto;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+section {
+  scroll-margin-top: 30px;
+}
+
+h2 {
+  color: var(--neon);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+
+/* =========================================================
+   MATRIX BACKGROUND
+========================================================= */
+
+#matrixCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -3;
+  pointer-events: none;
+  opacity: .20;
+}
+
+.matrix-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(0,0,0,.35),
+      rgba(0,0,0,.90)
+    );
+
+  backdrop-filter: blur(1px);
+}
+
+[data-theme="light"] .matrix-overlay {
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(248,249,250,.70),
+      rgba(248,249,250,.92)
+    );
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 40px;
+  align-items: center;
+  position: relative;
+  padding: 32px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,255,153,0.06),
+      rgba(255,255,255,0.02)
+    );
+
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  top: -200px;
+  right: -200px;
+  border-radius: 50%;
+  background: var(--neon);
+  opacity: .03;
+  filter: blur(20px);
+
+  animation:
+    heroOrb 6s ease-in-out infinite;
+}
+
+@keyframes heroOrb {
+  0%,100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.4);
+  }
+}
+
+
+/* =========================================================
+   HERO PHOTO
+========================================================= */
+
+.photo {
+  width: 320px;
+  height: 320px;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 4px solid var(--neon);
+
+  box-shadow:
+    0 0 35px rgba(0,255,153,.15);
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+  z-index: 2;
+
+  transition:
+    opacity .6s ease;
+}
+
+.hero-glow {
+  position: absolute;
+  inset: -30px;
+  background: var(--neon);
+  opacity: .08;
+  filter: blur(40px);
+  border-radius: 50%;
+
+  animation:
+    heroGlow 4s ease-in-out infinite;
+}
+
+@keyframes heroGlow {
+  0%,100% {
+    transform: scale(.9);
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
+
+.intro {
+  position: relative;
+  z-index: 3;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 13px;
+  border-radius: 999px;
+  background: rgba(0,255,153,.08);
+  border: 1px solid var(--border);
+  color: var(--neon);
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--neon);
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 12px var(--neon);
+
+  animation:
+    statusPulse 1.5s infinite;
+}
+
+@keyframes statusPulse {
+  0%,100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.6);
+    opacity: .5;
+  }
+}
+
+.intro h1 {
+  color: var(--neon);
+  font-size: 38px;
+  margin-bottom: 8px;
+  font-weight: 800;
+}
+
+.typing-wrapper {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+
+#typingText {
+  color: var(--neon);
+  font-weight: 700;
+}
+
+.cursor {
+  color: var(--neon);
+  animation: blink .7s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.lead {
+  color: var(--muted);
+  margin-bottom: 12px;
+  font-size: 1.05rem;
+}
+
+.meta {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   HERO BUTTONS
+========================================================= */
+
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: .3s;
+}
+
+.hero-btn.primary {
+  background: var(--neon);
+  color: #06110b;
+}
+
+.hero-btn.secondary {
+  border: 1px solid var(--border);
+  color: var(--neon);
+  background: var(--card);
+}
+
+.hero-btn:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 10px 25px rgba(0,255,153,.18);
+}
+
+.hero-btn.secondary:hover {
+  background: rgba(0,255,153,.08);
+}
+
+
+/* =========================================================
+   SCROLL HINT
+========================================================= */
+
+.scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.scroll-hint i {
+  color: var(--neon);
+  animation: scrollBounce 1.5s infinite;
+}
+
+@keyframes scrollBounce {
+  0%,100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+
+/* =========================================================
+   SOCIALS
+========================================================= */
+
+.social-heading {
+  color: var(--neon);
+  margin: 25px 0 12px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.social-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.social-row a {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--card);
+  border: 2px solid var(--border);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--neon);
+  font-size: 20px;
+
+  transition:
+    transform .35s cubic-bezier(.2,.8,.2,1),
+    background .35s ease,
+    color .35s ease,
+    box-shadow .35s ease;
+
+  text-decoration: none;
+}
+
+.social-row a:hover {
+  transform: translateY(-6px);
+  background: var(--neon);
+  color: #07110a;
+
+  box-shadow:
+    0 8px 25px rgba(0,255,153,.2);
+}
+
+
+/* =========================================================
+   GENERAL SECTIONS
+========================================================= */
+
+.about,
+.skills,
+.journey,
+.contact {
+  margin-top: 30px;
+  padding: 28px;
+  background: var(--card);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+}
+
+.about p {
+  color: var(--muted);
+  margin-bottom: 15px;
+  line-height: 1.8;
+}
+
+
+/* =========================================================
+   SKILLS — MOVING GOD MODE
+========================================================= */
+
+.skills {
+  position: relative;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(0,255,153,.08),
+      transparent 32%
+    ),
+
+    radial-gradient(
+      circle at 90% 90%,
+      rgba(0,255,153,.07),
+      transparent 32%
+    ),
+
+    var(--card);
+}
+
+/* Moving orbital rings */
+
+.skills::before {
+  content: "";
+  position: absolute;
+
+  width: 430px;
+  height: 430px;
+
+  top: -250px;
+  right: -180px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(0,255,153,.10);
+
+  box-shadow:
+    0 0 80px rgba(0,255,153,.04);
+
+  animation:
+    skillsOrbit 9s ease-in-out infinite;
+
+  pointer-events: none;
+}
+
+.skills::after {
+  content: "";
+
+  position: absolute;
+
+  width: 260px;
+  height: 260px;
+
+  bottom: -180px;
+  left: -120px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(0,255,153,.08);
+
+  animation:
+    skillsOrbitReverse 7s ease-in-out infinite;
+
+  pointer-events: none;
+}
+
+@keyframes skillsOrbit {
+
+  0%,100% {
+    transform:
+      rotate(0deg)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      rotate(180deg)
+      scale(1.15);
+  }
+}
+
+@keyframes skillsOrbitReverse {
+
+  0%,100% {
+    transform:
+      rotate(0deg)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      rotate(-180deg)
+      scale(1.18);
+  }
+}
+
+.skills > * {
+  position: relative;
+  z-index: 2;
+}
+
+.skills-intro {
+  text-align: center;
+  max-width: 650px;
+  margin: -8px auto 28px;
+  color: var(--muted);
+}
+
+
+/* =========================================================
+   SKILLS GRID
+========================================================= */
+
+.skills-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(280px,1fr)
+    );
+
+  gap: 20px;
+}
+
+
+/* =========================================================
+   SKILL CARD
+========================================================= */
+
+.skill-item {
+  position: relative;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0,255,153,.045),
+      rgba(255,255,255,.012)
+    );
+
+  padding: 22px;
+
+  border-radius: 14px;
+
+  border: 1px solid var(--border);
+
+  overflow: hidden;
+
+  opacity: 0;
+  transform: translateY(35px);
+
+  transition:
+    transform .55s cubic-bezier(.2,.8,.2,1),
+    border-color .35s ease,
+    box-shadow .35s ease,
+    background .35s ease;
+
+  will-change: transform;
+}
+
+.skill-item.reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.skill-item:nth-child(1) {
+  transition-delay: .05s;
+}
+
+.skill-item:nth-child(2) {
+  transition-delay: .12s;
+}
+
+.skill-item:nth-child(3) {
+  transition-delay: .19s;
+}
+
+.skill-item:nth-child(4) {
+  transition-delay: .26s;
+}
+
+
+/* Moving light line */
+
+.skill-item::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -120%;
+
+  width: 90%;
+  height: 2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--neon),
+      transparent
+    );
+
+  opacity: .8;
+
+  transition:
+    left .7s ease;
+}
+
+.skill-item:hover::before {
+  left: 120%;
+}
+
+
+/* Inner moving glow */
+
+.skill-item::after {
+  content: "";
+
+  position: absolute;
+
+  width: 100px;
+  height: 100px;
+
+  right: -50px;
+  bottom: -50px;
+
+  border-radius: 50%;
+
+  background: var(--neon);
+
+  opacity: 0;
+
+  filter: blur(35px);
+
+  transition:
+    opacity .4s ease,
+    transform .6s ease;
+}
+
+.skill-item:hover::after {
+  opacity: .10;
+  transform: scale(1.8);
+}
+
+.skill-item:hover {
+  transform:
+    translateY(-8px)
+    scale(1.015);
+
+  border-color:
+    rgba(0,255,153,.65);
+
+  box-shadow:
+    0 15px 35px rgba(0,255,153,.10),
+    inset 0 0 25px rgba(0,255,153,.025);
+}
+
+
+/* =========================================================
+   SKILL TOP
+========================================================= */
+
+.skill-top {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 18px;
+}
+
+.skill-icon {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--neon);
+
+  background:
+    rgba(0,255,153,.08);
+
+  border: 1px solid var(--border);
+
+  border-radius: 13px;
+
+  font-size: 20px;
+
+  transition:
+    transform .5s cubic-bezier(.2,.8,.2,1),
+    background .35s ease,
+    color .35s ease,
+    box-shadow .35s ease;
+}
+
+.skill-item:hover .skill-icon {
+  transform:
+    rotate(8deg)
+    scale(1.10);
+
+  background:
+    var(--neon);
+
+  color:
+    #07110a;
+
+  box-shadow:
+    0 0 20px rgba(0,255,153,.25);
+}
+
+.skill-name {
+  font-weight: 600;
+  font-size: 17px;
+}
+
+
+/* =========================================================
+   LIQUID SKILL BAR
+========================================================= */
+
+.progress-bar {
+  height: 12px;
+
+  background:
+    rgba(128,128,128,.15);
+
+  border-radius:
+    999px;
+
+  overflow:
+    hidden;
+
+  position:
+    relative;
+
+  border:
+    1px solid rgba(0,255,153,.08);
+
+  box-shadow:
+    inset 0 0 8px rgba(0,0,0,.35);
+}
+
+.progress {
+  height: 100%;
+
+  width: 0;
+
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius:
+    999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--neon),
+      var(--neon-light),
+      var(--neon)
+    );
+
+  background-size:
+    200% 100%;
+
+  box-shadow:
+    0 0 12px rgba(0,255,153,.45),
+    0 0 25px rgba(0,255,153,.20);
+
+  transition:
+    width 1.8s cubic-bezier(.2,.8,.2,1);
+}
+
+.progress::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      110deg,
+      transparent 10%,
+      rgba(255,255,255,.5) 35%,
+      transparent 55%
+    );
+
+  background-size:
+    200% 100%;
+
+  animation:
+    liquidMove 2.2s linear infinite;
+}
+
+.progress::after {
+  content: "";
+
+  position: absolute;
+
+  width: 100px;
+  height: 100px;
+
+  right: -50px;
+  top: -45px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255,255,255,.12);
+
+  filter:
+    blur(12px);
+
+  animation:
+    liquidBubble 3s ease-in-out infinite;
+}
+
+@keyframes liquidMove {
+  from {
+    background-position:
+      200% 0;
+  }
+
+  to {
+    background-position:
+      -200% 0;
+  }
+}
+
+@keyframes liquidBubble {
+  0%,100% {
+    transform:
+      translateX(0)
+      scale(.8);
+  }
+
+  50% {
+    transform:
+      translateX(-35px)
+      scale(1.2);
+  }
+}
+
+.skill-item:hover .progress {
+  box-shadow:
+    0 0 18px rgba(0,255,153,.65),
+    0 0 35px rgba(0,255,153,.25);
+}
+
+
+/* =========================================================
+   NISIE'S BRILLIANCY
+========================================================= */
+
+.brilliancy {
+  margin-top: 30px;
+  padding: 28px;
+
+  position: relative;
+  overflow: hidden;
+
+  background:
+
+    radial-gradient(
+      circle at top right,
+      rgba(0,255,153,.10),
+      transparent 35%
+    ),
+
+    radial-gradient(
+      circle at bottom left,
+      rgba(0,255,153,.06),
+      transparent 30%
+    ),
+
+    var(--card);
+
+  border-radius: 16px;
+  border: 1px solid var(--border);
+}
+
+
+/* =========================================================
+   BRILLIANCY MOVING CYCLES
+========================================================= */
+
+.brilliancy::before {
+  content: '';
+
+  position: absolute;
+
+  width: 520px;
+  height: 520px;
+
+  top: -280px;
+  right: -230px;
+
+  border-radius: 50%;
+
+  border:
+    1px solid rgba(0,255,153,.10);
+
+  box-shadow:
+    0 0 100px rgba(0,255,153,.04);
+
+  animation:
+    brillianceCycle 10s linear infinite;
+
+  pointer-events: none;
+}
+
+.brilliancy::after {
+  content: "";
+
+  position: absolute;
+
+  width: 280px;
+  height: 280px;
+
+  left: -170px;
+  bottom: -170px;
+
+  border-radius: 50%;
+
+  border:
+    1px solid rgba(0,255,153,.08);
+
+  box-shadow:
+    0 0 70px rgba(0,255,153,.04);
+
+  animation:
+    brillianceCycleReverse 8s linear infinite;
+
+  pointer-events: none;
+}
+
+@keyframes brillianceCycle {
+
+  0% {
+    transform:
+      rotate(0deg)
+      scale(.9);
+  }
+
+  50% {
+    transform:
+      rotate(180deg)
+      scale(1.12);
+  }
+
+  100% {
+    transform:
+      rotate(360deg)
+      scale(.9);
+  }
+}
+
+@keyframes brillianceCycleReverse {
+
+  0% {
+    transform:
+      rotate(0deg)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      rotate(-180deg)
+      scale(1.18);
+  }
+
+  100% {
+    transform:
+      rotate(-360deg)
+      scale(1);
+  }
+}
+
+.brilliancy > * {
+  position: relative;
+  z-index: 2;
+}
+
+.brilliancy-intro {
+  max-width: 700px;
+  margin: -8px auto 30px;
+  text-align: center;
+  color: var(--muted);
+}
+
+
+/* =========================================================
+   BRILLIANCY GRID
+========================================================= */
+
+.brilliancy-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap: 20px;
+
+  position: relative;
+  z-index: 2;
+}
+
+
+/* =========================================================
+   BRILLIANCY CARD
+========================================================= */
+
+.brilliancy-card {
+  position: relative;
+
+  padding: 25px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0,255,153,.045),
+      rgba(255,255,255,.012)
+    );
+
+  border:
+    1px solid var(--border);
+
+  border-radius:
+    15px;
+
+  overflow:
+    hidden;
+
+  opacity: 0;
+  transform:
+    translateY(40px);
+
+  transition:
+    transform .6s cubic-bezier(.2,.8,.2,1),
+    border-color .35s ease,
+    box-shadow .35s ease,
+    background .35s ease;
+
+  will-change:
+    transform;
+}
+
+.brilliancy-card.reveal {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+}
+
+.brilliancy-card:nth-child(1) {
+  transition-delay: .05s;
+}
+
+.brilliancy-card:nth-child(2) {
+  transition-delay: .12s;
+}
+
+.brilliancy-card:nth-child(3) {
+  transition-delay: .19s;
+}
+
+.brilliancy-card:nth-child(4) {
+  transition-delay: .26s;
+}
+
+.brilliancy-card:nth-child(5) {
+  transition-delay: .33s;
+}
+
+.brilliancy-card:nth-child(6) {
+  transition-delay: .40s;
+}
+
+
+/* Neon scanning line */
+
+.brilliancy-card::before {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: -120%;
+
+  width: 100%;
+  height: 3px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--neon),
+      transparent
+    );
+
+  transition:
+    left .75s ease;
+}
+
+.brilliancy-card:hover::before {
+  left: 120%;
+}
+
+
+/* Floating glow */
+
+.brilliancy-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 130px;
+  height: 130px;
+
+  right: -70px;
+  bottom: -70px;
+
+  border-radius: 50%;
+
+  background:
+    var(--neon);
+
+  opacity: 0;
+
+  filter:
+    blur(40px);
+
+  transition:
+    opacity .45s ease,
+    transform .6s ease;
+}
+
+.brilliancy-card:hover::after {
+  opacity: .10;
+
+  transform:
+    scale(1.7);
+}
+
+.brilliancy-card:hover {
+  transform:
+    translateY(-9px)
+    scale(1.015);
+
+  border-color:
+    rgba(0,255,153,.65);
+
+  box-shadow:
+    0 15px 35px
+    rgba(0,255,153,.12),
+
+    inset 0 0 25px
+    rgba(0,255,153,.025);
+}
+
+
+/* =========================================================
+   BRILLIANCY ICON
+========================================================= */
+
+.brilliancy-icon {
+  width: 55px;
+  height: 55px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background:
+    rgba(0,255,153,.08);
+
+  border:
+    1px solid var(--border);
+
+  border-radius:
+    14px;
+
+  color:
+    var(--neon);
+
+  font-size:
+    23px;
+
+  margin-bottom:
+    18px;
+
+  transition:
+    transform .5s cubic-bezier(.2,.8,.2,1),
+    background .35s ease,
+    color .35s ease,
+    box-shadow .35s ease;
+}
+
+.brilliancy-card:hover
+.brilliancy-icon {
+  transform:
+    rotate(8deg)
+    scale(1.10);
+
+  background:
+    var(--neon);
+
+  color:
+    #07110a;
+
+  box-shadow:
+    0 0 22px
+    rgba(0,255,153,.25);
+}
+
+.brilliancy-card h3 {
+  margin-bottom:
+    10px;
+
+  font-size:
+    19px;
+}
+
+.brilliancy-card p {
+  color:
+    var(--muted);
+
+  font-size:
+    14px;
+
+  line-height:
+    1.7;
+
+  margin-bottom:
+    18px;
+}
+
+.brilliancy-tag {
+  display:
+    inline-block;
+
+  padding:
+    5px 10px;
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(0,255,153,.08);
+
+  color:
+    var(--neon);
+
+  border:
+    1px solid var(--border);
+
+  font-size:
+    11px;
+
+  font-weight:
+    600;
+
+  transition:
+    .3s ease;
+}
+
+.brilliancy-card:hover .brilliancy-tag {
+  background:
+    rgba(0,255,153,.15);
+
+  box-shadow:
+    0 0 12px
+    rgba(0,255,153,.10);
+}
+
+
+/* =========================================================
+   JOURNEY — GOD MODE
+========================================================= */
+
+.journey {
+  position: relative;
+  overflow: hidden;
+
+  background:
+
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(0,255,153,.08),
+      transparent 30%
+    ),
+
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(0,255,153,.06),
+      transparent 30%
+    ),
+
+    var(--card);
+}
+
+.journey::before {
+  content: "";
+
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  top: -250px;
+  right: -250px;
+
+  border-radius: 50%;
+
+  border:
+    1px solid rgba(0,255,153,.08);
+
+  box-shadow:
+    0 0 100px rgba(0,255,153,.05);
+
+  animation:
+    journeyOrb 8s ease-in-out infinite;
+
+  pointer-events: none;
+}
+
+@keyframes journeyOrb {
+  0%,100% {
+    transform:
+      scale(1);
+  }
+
+  50% {
+    transform:
+      scale(1.25);
+  }
+}
+
+.journey-subtitle {
+  text-align: center;
+  max-width: 650px;
+
+  margin:
+    -8px auto 35px;
+
+  color:
+    var(--muted);
+
+  line-height:
+    1.8;
+}
+
+
+/* =========================================================
+   TIMELINE
+========================================================= */
+
+.timeline {
+  position: relative;
+  max-width: 850px;
+
+  margin:
+    0 auto;
+
+  padding-left:
+    55px;
+}
+
+.timeline::before {
+  content: "";
+
+  position: absolute;
+
+  left:
+    19px;
+
+  top:
+    0;
+
+  bottom:
+    0;
+
+  width:
+    3px;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      transparent,
+      var(--neon),
+      var(--neon),
+      rgba(0,255,153,.15),
+      transparent
+    );
+
+  box-shadow:
+    0 0 15px rgba(0,255,153,.35);
+}
+
+.timeline-item {
+  position:
+    relative;
+
+  margin-bottom:
+    30px;
+
+  opacity:
+    0;
+
+  transform:
+    translateX(-25px);
+
+  animation:
+    journeyReveal .8s ease forwards;
+}
+
+.timeline-item:nth-child(1) {
+  animation-delay: .1s;
+}
+
+.timeline-item:nth-child(2) {
+  animation-delay: .25s;
+}
+
+.timeline-item:nth-child(3) {
+  animation-delay: .4s;
+}
+
+.timeline-item:nth-child(4) {
+  animation-delay: .55s;
+}
+
+.timeline-item:nth-child(5) {
+  animation-delay: .7s;
+}
+
+@keyframes journeyReveal {
+  to {
+    opacity:
+      1;
+
+    transform:
+      translateX(0);
+  }
+}
+
+.timeline-item::before {
+  content: "";
+
+  position:
+    absolute;
+
+  left:
+    -45px;
+
+  top:
+    23px;
+
+  width:
+    18px;
+
+  height:
+    18px;
+
+  background:
+    var(--bg);
+
+  border:
+    3px solid var(--neon);
+
+  border-radius:
+    50%;
+
+  box-shadow:
+    0 0 10px var(--neon),
+    0 0 25px rgba(0,255,153,.5);
+
+  z-index:
+    3;
+}
+
+.timeline-item.current::before {
+  background:
+    var(--neon);
+
+  box-shadow:
+    0 0 10px var(--neon),
+    0 0 25px var(--neon),
+    0 0 50px rgba(0,255,153,.45);
+
+  animation:
+    currentPulse 1.8s infinite;
+}
+
+@keyframes currentPulse {
+  0%,100% {
+    transform:
+      scale(1);
+  }
+
+  50% {
+    transform:
+      scale(1.35);
+  }
+}
+
+
+/* =========================================================
+   JOURNEY CARDS
+========================================================= */
+
+.timeline-content {
+  position:
+    relative;
+
+  padding:
+    22px 24px;
+
+  border-radius:
+    16px;
+
+  background:
+
+    linear-gradient(
+      135deg,
+      rgba(0,255,153,.045),
+      rgba(255,255,255,.015)
+    );
+
+  border:
+    1px solid var(--border);
+
+  overflow:
+    hidden;
+
+  transition:
+    .35s ease;
+}
+
+.timeline-content::before {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  left:
+    0;
+
+  top:
+    0;
+
+  width:
+    4px;
+
+  height:
+    100%;
+
+  background:
+    var(--neon);
+
+  transform:
+    scaleY(0);
+
+  transform-origin:
+    bottom;
+
+  transition:
+    .4s ease;
+}
+
+.timeline-content:hover::before {
+  transform:
+    scaleY(1);
+}
+
+.timeline-content:hover {
+  transform:
+    translateX(8px);
+
+  border-color:
+    var(--neon);
+
+  box-shadow:
+    0 15px 35px rgba(0,255,153,.12),
+    inset 0 0 25px rgba(0,255,153,.025);
+}
+
+.journey-year {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    8px;
+
+  color:
+    var(--neon);
+
+  font-size:
+    12px;
+
+  font-weight:
+    700;
+
+  letter-spacing:
+    1.5px;
+
+  text-transform:
+    uppercase;
+
+  margin-bottom:
+    8px;
+}
+
+.timeline-content h3 {
+  font-size:
+    19px;
+
+  margin-bottom:
+    8px;
+
+  color:
+    var(--text);
+}
+
+.timeline-content p {
+  color:
+    var(--muted);
+
+  line-height:
+    1.75;
+
+  font-size:
+    14px;
+}
+
+.journey-badge {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    7px;
+
+  margin-top:
+    14px;
+
+  padding:
+    6px 11px;
+
+  border-radius:
+    999px;
+
+  color:
+    var(--neon);
+
+  background:
+    rgba(0,255,153,.08);
+
+  border:
+    1px solid var(--border);
+
+  font-size:
+    11px;
+
+  font-weight:
+    600;
+}
+
+
+/* =========================================================
+   JOURNEY END
+========================================================= */
+
+.journey-end {
+  margin-top:
+    35px;
+
+  padding:
+    22px;
+
+  text-align:
+    center;
+
+  border-radius:
+    15px;
+
+  border:
+    1px solid var(--border);
+
+  background:
+    rgba(0,255,153,.04);
+}
+
+.journey-end strong {
+  color:
+    var(--neon);
+
+  font-size:
+    18px;
+}
+
+.journey-end p {
+  color:
+    var(--muted);
+
+  margin-top:
+    7px;
+
+  font-size:
+    13px;
+}
+
+
+/* =========================================================
+   SOUTH AFRICA TO THE WORLD
+========================================================= */
+
+.global-section {
+  margin-top:
+    30px;
+
+  padding:
+    60px 30px;
+
+  border-radius:
+    18px;
+
+  border:
+    1px solid var(--border);
+
+  background:
+
+    radial-gradient(
+      circle at center,
+      rgba(0,255,153,.10),
+      transparent 45%
+    ),
+
+    var(--card);
+
+  text-align:
+    center;
+
+  overflow:
+    hidden;
+
+  position:
+    relative;
+}
+
+.global-section::before {
+  content: '';
+
+  position:
+    absolute;
+
+  width:
+    400px;
+
+  height:
+    400px;
+
+  border:
+    1px solid rgba(0,255,153,.08);
+
+  border-radius:
+    50%;
+
+  left:
+    50%;
+
+  top:
+    50%;
+
+  transform:
+    translate(-50%,-50%);
+
+  animation:
+    worldPulse 5s infinite;
+}
+
+@keyframes worldPulse {
+  0%,100% {
+    transform:
+      translate(-50%,-50%)
+      scale(.8);
+
+    opacity:
+      .3;
+  }
+
+  50% {
+    transform:
+      translate(-50%,-50%)
+      scale(1.2);
+
+    opacity:
+      .8;
+  }
+}
+
+.global-content {
+  position:
+    relative;
+
+  z-index:
+    2;
+}
+
+.south-africa-badge {
+  font-size:
+    60px;
+
+  margin-bottom:
+    10px;
+
+  animation:
+    flagFloat 3s ease-in-out infinite;
+}
+
+@keyframes flagFloat {
+  0%,100% {
+    transform:
+      translateY(0);
+  }
+
+  50% {
+    transform:
+      translateY(-10px);
+  }
+}
+
+.global-lead {
+  color:
+    var(--neon);
+
+  font-size:
+    20px;
+
+  font-weight:
+    600;
+
+  margin-bottom:
+    12px;
+}
+
+.global-text {
+  max-width:
+    700px;
+
+  margin:
+    auto;
+
+  color:
+    var(--muted);
+
+  line-height:
+    1.8;
+}
+
+.global-route {
+  max-width:
+    800px;
+
+  margin:
+    45px auto 35px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+}
+
+.route-point {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    center;
+
+  min-width:
+    120px;
+}
+
+.route-dot {
+  width:
+    16px;
+
+  height:
+    16px;
+
+  background:
+    var(--card);
+
+  border:
+    3px solid var(--neon);
+
+  border-radius:
+    50%;
+
+  margin-bottom:
+    10px;
+
+  box-shadow:
+    0 0 12px rgba(0,255,153,.3);
+}
+
+.route-point.active
+.route-dot {
+  background:
+    var(--neon);
+
+  box-shadow:
+    0 0 25px var(--neon);
+}
+
+.route-point strong {
+  font-size:
+    14px;
+}
+
+.route-point small {
+  color:
+    var(--muted);
+
+  font-size:
+    10px;
+
+  margin-top:
+    3px;
+}
+
+.route-line {
+  height:
+    2px;
+
+  flex:
+    1;
+
+  max-width:
+    150px;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      var(--neon),
+      rgba(0,255,153,.1)
+    );
+
+  position:
+    relative;
+
+  overflow:
+    hidden;
+}
+
+.route-line::after {
+  content: '';
+
+  position:
+    absolute;
+
+  width:
+    40px;
+
+  height:
+    100%;
+
+  background:
+    white;
+
+  box-shadow:
+    0 0 10px var(--neon);
+
+  animation:
+    travel 2s linear infinite;
+}
+
+@keyframes travel {
+  from {
+    transform:
+      translateX(-50px);
+  }
+
+  to {
+    transform:
+      translateX(200px);
+  }
+}
+
+.global-quote {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    15px;
+
+  padding:
+    14px 22px;
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(0,255,153,.06);
+
+  border:
+    1px solid var(--border);
+
+  color:
+    var(--neon);
+
+  font-weight:
+    600;
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact form {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    16px;
+
+  max-width:
+    700px;
+
+  margin:
+    0 auto;
+}
+
+.contact input,
+.contact textarea {
+  padding:
+    14px 18px;
+
+  background:
+    var(--bg);
+
+  border:
+    1px solid var(--border);
+
+  border-radius:
+    10px;
+
+  color:
+    var(--text);
+
+  font-family:
+    inherit;
+
+  transition:
+    border-color .3s ease,
+    box-shadow .3s ease;
+}
+
+.contact input:focus,
+.contact textarea:focus {
+  outline:
+    none;
+
+  border-color:
+    var(--neon);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(0,255,153,.15);
+}
+
+.contact textarea {
+  resize:
+    vertical;
+
+  min-height:
+    140px;
+}
+
+.contact button {
+  padding:
+    14px 32px;
+
+  background:
+    var(--neon);
+
+  color:
+    #0a0a0a;
+
+  font-weight:
+    600;
+
+  border:
+    none;
+
+  border-radius:
+    10px;
+
+  cursor:
+    pointer;
+
+  font-size:
+    1.05rem;
+
+  transition:
+    all .3s;
+}
+
+.contact button:hover {
+  background:
+    var(--neon-light);
+
+  transform:
+    translateY(-3px);
+}
+
+
+/* =========================================================
+   FLOATING CONTROLS
+========================================================= */
+
+#themeToggle,
+#backToTop {
+  position:
+    fixed;
+
+  background:
+    var(--card);
+
+  border:
+    2px solid var(--neon);
+
+  color:
+    var(--neon);
+
+  width:
+    52px;
+
+  height:
+    52px;
+
+  border-radius:
+    50%;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  font-size:
+    22px;
+
+  cursor:
+    pointer;
+
+  z-index:
+    1000;
+
+  box-shadow:
+    0 4px 20px
+    rgba(0,255,153,.25);
+
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+}
+
+#themeToggle:hover,
+#backToTop:hover {
+  transform:
+    translateY(-4px);
+
+  box-shadow:
+    0 8px 28px
+    rgba(0,255,153,.35);
+}
+
+#themeToggle {
+  top:
+    20px;
+
+  right:
+    80px;
+}
+
+#backToTop {
+  bottom:
+    30px;
+
+  right:
+    30px;
+
+  display:
+    none;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+  text-align:
+    center;
+
+  padding:
+    40px 20px;
+
+  color:
+    var(--muted);
+
+  font-size:
+    14px;
+
+  position:
+    relative;
+
+  z-index:
+    2;
+}
+
+
+/* =========================================================
+   REVEAL SYSTEM
+========================================================= */
+
+.reveal-on-scroll {
+  opacity: 0;
+
+  transform:
+    translateY(35px);
+
+  transition:
+    opacity .8s ease,
+    transform .8s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal-on-scroll.visible {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  body {
+    padding-bottom:
+      30px;
+  }
+
+  .page {
+    padding:
+      10px;
+  }
+
+  .hero {
+    grid-template-columns:
+      1fr;
+
+    gap:
+      20px;
+
+    padding:
+      20px;
+  }
+
+  .photo {
+    width:
+      100%;
+
+    height:
+      auto;
+
+    aspect-ratio:
+      1 / 1;
+  }
+
+  .photo img {
+    width:
+      100%;
+
+    height:
+      100%;
+  }
+
+  .intro h1 {
+    font-size:
+      28px;
+  }
+
+  .typing-wrapper {
+    font-size:
+      17px;
+  }
+
+  .lead {
+    font-size:
+      1rem;
+  }
+
+  .meta {
+    font-size:
+      12px;
+  }
+
+  .hero-buttons {
+    flex-direction:
+      column;
+  }
+
+  .hero-btn {
+    justify-content:
+      center;
+  }
+
+  .social-row a {
+    width:
+      40px;
+
+    height:
+      40px;
+
+    font-size:
+      18px;
+  }
+
+  .about,
+  .skills,
+  .journey,
+  .contact,
+  .brilliancy {
+    padding:
+      20px;
+  }
+
+  h2 {
+    font-size:
+      24px;
+
+    margin-bottom:
+      15px;
+  }
+
+  .skills-grid {
+    grid-template-columns:
+      1fr;
+
+    gap:
+      15px;
+  }
+
+  .skill-item {
+    padding:
+      16px;
+  }
+
+  .skill-item:hover {
+    transform:
+      translateY(-5px);
+  }
+
+  .brilliancy-grid {
+    grid-template-columns:
+      1fr;
+
+    gap:
+      15px;
+  }
+
+  .brilliancy-card {
+    padding:
+      20px;
+  }
+
+  .brilliancy-card:hover {
+    transform:
+      translateY(-5px);
+  }
+
+  .timeline {
+    padding-left:
+      38px;
+  }
+
+  .timeline::before {
+    left:
+      12px;
+  }
+
+  .timeline-item::before {
+    left:
+      -34px;
+
+    width:
+      15px;
+
+    height:
+      15px;
+  }
+
+  .timeline-content {
+    padding:
+      18px;
+  }
+
+  .timeline-content h3 {
+    font-size:
+      17px;
+  }
+
+  .timeline-content p {
+    font-size:
+      13px;
+  }
+
+  .global-section {
+    padding:
+      40px 18px;
+  }
+
+  .global-lead {
+    font-size:
+      17px;
+  }
+
+  .global-route {
+    flex-direction:
+      column;
+
+    gap:
+      15px;
+  }
+
+  .route-line {
+    width:
+      2px;
+
+    height:
+      45px;
+
+    flex:
+      none;
+
+    background:
+
+      linear-gradient(
+        180deg,
+        var(--neon),
+        rgba(0,255,153,.1)
+      );
+  }
+
+  .route-line::after {
+    width:
+      100%;
+
+    height:
+      15px;
+
+    animation:
+      travelVertical 2s linear infinite;
+  }
+
+  @keyframes travelVertical {
+    from {
+      transform:
+        translateY(-20px);
+    }
+
+    to {
+      transform:
+        translateY(60px);
+    }
+  }
+
+  .global-quote {
+    font-size:
+      12px;
+
+    padding:
+      12px 16px;
+  }
+
+  .contact input,
+  .contact textarea {
+    padding:
+      12px;
+
+    font-size:
+      14px;
+  }
+
+  .contact button {
+    padding:
+      12px 20px;
+
+    font-size:
+      16px;
+  }
+
+  footer {
+    font-size:
+      12px;
+
+    padding:
+      20px 10px;
+  }
+
+  #themeToggle {
+    width:
+      44px;
+
+    height:
+      44px;
+
+    right:
+      65px;
+
+    top:
+      15px;
+
+    font-size:
+      18px;
+  }
+
+  #backToTop {
+    width:
+      44px;
+
+    height:
+      44px;
+
+    font-size:
+      18px;
+
+    right:
+      20px;
+
+    bottom:
+      20px;
+  }
+
+  .skills::before {
+    width:
+      300px;
+
+    height:
+      300px;
+  }
+
+  .brilliancy::before {
+    width:
+      330px;
+
+    height:
+      330px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior:
+      auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration:
+      .01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      .01ms !important;
+  }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     MATRIX BACKGROUND
+===================================================== -->
+
+<canvas id="matrixCanvas"></canvas>
+
+<div class="matrix-overlay"></div>
+
+
+<div class="page">
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+  <div class="photo">
+
+    <div class="hero-glow"></div>
+
+    <img
+      id="heroImg"
+      src="images/nisie.jpg"
+      alt="Nemakhavhani Nisikhangwe"
+      loading="eager"
+    >
+
+  </div>
+
+
+  <div class="intro">
+
+    <div class="status">
+
+      <span class="status-dot"></span>
+
+      Currently leveling up
+
+    </div>
+
+
+    <h1>
+      Level Up with Nisie
+    </h1>
+
+
+    <div class="typing-wrapper">
+
+      I'm a
+      <span id="typingText"></span>
+      <span class="cursor">|</span>
+
+    </div>
+
+
+    <p class="lead">
+
+      Building better habits,
+      better code, and a better me,
+      one day at a time.
+
+    </p>
+
+
+    <div class="meta">
+
+      I'm the next
+      <b>BIG THING</b>
+      coming.
+
+    </div>
+
+
+    <div class="hero-buttons">
+
+      <a
+        href="#brilliancy"
+        class="hero-btn primary"
+      >
+
+        <i class="fas fa-bolt"></i>
+
+        Explore My World
+
+      </a>
+
+
+      <a
+        href="#contact"
+        class="hero-btn secondary"
+      >
+
+        <i class="fas fa-paper-plane"></i>
+
+        Contact Me
+
+      </a>
+
+    </div>
+
+
+    <div class="scroll-hint">
+
+      <span>
+        Scroll to explore
+      </span>
+
+      <i class="fas fa-chevron-down"></i>
+
+    </div>
+
+
+    <h3 class="social-heading">
+
+      Follow Me on My Socials
+
+    </h3>
+
+
+    <div class="social-row">
+
+      <a
+        href="https://www.facebook.com/zeus.ghod"
+        target="_blank"
+        rel="noopener"
+        aria-label="Facebook"
+      >
+
+        <i class="fab fa-facebook-f"></i>
+
+      </a>
+
+
+      <a
+        href="https://www.instagram.com/"
+        target="_blank"
+        rel="noopener"
+        aria-label="Instagram"
+      >
+
+        <i class="fab fa-instagram"></i>
+
+      </a>
+
+
+      <a
+        href="#"
+        aria-label="X"
+      >
+
+        <i class="fab fa-x-twitter"></i>
+
+      </a>
+
+
+      <a
+        href="https://www.youtube.com/@Verified--"
+        target="_blank"
+        rel="noopener"
+        aria-label="YouTube"
+      >
+
+        <i class="fab fa-youtube"></i>
+
+      </a>
+
+
+      <a
+        href="https://github.com/MR-GOTHAM"
+        target="_blank"
+        rel="noopener"
+        aria-label="GitHub"
+      >
+
+        <i class="fab fa-github"></i>
+
+      </a>
+
+
+      <a
+        href="https://your-gumroad-link.com"
+        target="_blank"
+        rel="noopener"
+        title="Gumroad"
+        aria-label="Gumroad"
+      >
+
+        <i class="fas fa-store"></i>
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section class="about">
+
+  <h2>
+    About Me
+  </h2>
+
+
+  <p>
+
+    Hi, I'm
+    <strong>NEMAKHAVHANI NISIKHANGWE</strong>,
+    a passionate South African tech enthusiast
+    and aspiring software developer.
+
+    I love building websites,
+    exploring emerging technologies,
+    and creating impactful digital solutions.
+
+  </p>
+
+
+  <p>
+
+    I hold a
+    <strong>FULL STACK DEVELOPMENT CERTIFICATE</strong>
+    from the
+    <strong>FNB App of the Year 2025</strong>
+    program.
+
+    My goal is to inspire South African students
+    to embrace technology, develop valuable skills,
+    and unlock their potential through continuous learning.
+
+  </p>
+
+
+  <p>
+
+    Beyond coding, I enjoy playing
+    <strong>chess</strong>
+    and
+    <strong>PUBG</strong>,
+
+    constantly challenging myself to grow
+    both personally and professionally.
+
+    Every project I undertake brings me closer
+    to becoming a leader in South Africa's tech scene.
+
+  </p>
+
+</section>
+
+
+
+<!-- =====================================================
+     SKILLS
+===================================================== -->
+
+<section class="skills" id="skills">
+
+  <h2>
+    My Skills
+  </h2>
+
+
+  <p class="skills-intro">
+
+    I'm constantly learning,
+    improving, and pushing my abilities
+    to the next level.
+
+  </p>
+
+
+  <div class="skills-grid">
+
+
+    <div class="skill-item interactive-skill">
+
+      <div class="skill-top">
+
+        <div class="skill-icon">
+
+          <i class="fas fa-code"></i>
+
+        </div>
+
+        <div style="flex:1">
+
+          <div class="skill-name">
+            Coding
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="progress-bar">
+
+        <div
+          class="progress"
+          data-width="60"
+        ></div>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="skill-item interactive-skill">
+
+      <div class="skill-top">
+
+        <div class="skill-icon">
+
+          <i class="fas fa-palette"></i>
+
+        </div>
+
+        <div style="flex:1">
+
+          <div class="skill-name">
+            Design
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="progress-bar">
+
+        <div
+          class="progress"
+          data-width="60"
+        ></div>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="skill-item interactive-skill">
+
+      <div class="skill-top">
+
+        <div class="skill-icon">
+
+          <i class="fas fa-shield-halved"></i>
+
+        </div>
+
+        <div style="flex:1">
+
+          <div class="skill-name">
+            Ethical Hacking
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="progress-bar">
+
+        <div
+          class="progress"
+          data-width="45"
+        ></div>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="skill-item interactive-skill">
+
+      <div class="skill-top">
+
+        <div class="skill-icon">
+
+          <i class="fas fa-briefcase"></i>
+
+        </div>
+
+        <div style="flex:1">
+
+          <div class="skill-name">
+            Freelancing
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="progress-bar">
+
+        <div
+          class="progress"
+          data-width="65"
+        ></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     NISIE'S BRILLIANCY
+===================================================== -->
+
+<section
+  class="brilliancy"
+  id="brilliancy"
+>
+
+  <h2>
+    Nisie's Brilliancy
+  </h2>
+
+
+  <p class="brilliancy-intro">
+
+    A collection of ideas, achievements,
+    projects, and moments that represent
+    my growth, creativity, and ambition.
+
+  </p>
+
+
+  <div class="brilliancy-grid">
+
+
+    <div class="brilliancy-card">
+
+      <div class="brilliancy-icon">
+
+        <i class="fas fa-code"></i>
+
+      </div>
+
+      <h3>
+        Building with Code
+      </h3>
+
+      <p>
+
+        Turning ideas into real digital
+        experiences through HTML, CSS,
+        JavaScript, and continuous learning.
+
+      </p>
+
+      <span class="brilliancy-tag">
+        Developer
+      </span>
+
+    </div>
+
+
+
+    <div class="brilliancy-card">
+
+      <div class="brilliancy-icon">
+
+        <i class="fas fa-lightbulb"></i>
+
+      </div>
+
+      <h3>
+        Big Ideas
+      </h3>
+
+      <p>
+
+        I believe great things start as
+        simple ideas.
+
+        I constantly explore new concepts
+        that can solve real problems.
+
+      </p>
+
+      <span class="brilliancy-tag">
+        Innovator
+      </span>
+
+    </div>
+
+
+
+    <div class="brilliancy-card">
+
+      <div class="brilliancy-icon">
+
+        <i class="fas fa-shield-halved"></i>
+
+      </div>
+
+      <h3>
+        Cybersecurity
+      </h3>
+
+      <p>
+
+        Exploring ethical hacking,
+        networking, and cybersecurity
+        while developing the mindset
+        of a responsible security professional.
+
+      </p>
+
+      <span class="brilliancy-tag">
+        Ethical Hacking
+      </span>
+
+    </div>
+
+
+
+    <div class="brilliancy-card">
+
+      <div class="brilliancy-icon">
+
+        <i class="fas fa-chess-knight"></i>
+
+      </div>
+
+      <h3>
+        Strategic Mind
+      </h3>
+
+      <p>
+
+        Chess teaches me patience,
+        calculation, strategy, and the
+        importance of thinking several
+        moves ahead.
+
+      </p>
+
+      <span class="brilliancy-tag">
+        Thinker
+      </span>
+
+    </div>
+
+
+
+    <div class="brilliancy-card">
+
+      <div class="brilliancy-icon">
+
+        <i class="fas fa-trophy"></i>
+
+      </div>
+
+      <h3>
+        Achievements
+      </h3>
+
+      <p>
+
+        From learning new skills to
+        completing projects, every
+        achievement represents another
+        level in my journey.
+
+      </p>
+
+      <span class="brilliancy-tag">
+        Growth
+      </span>
+
+    </div>
+
+
+
+    <div class="brilliancy-card">
+
+      <div class="brilliancy-icon">
+
+        <i class="fas fa-rocket"></i>
+
+      </div>
+
+      <h3>
+        The Next Big Thing
+      </h3>
+
+      <p>
+
+        I'm not trying to become a
+        better version of someone else.
+
+        I'm building the best version
+        of Myself
+
+      </p>
+
+      <span class="brilliancy-tag">
+        Vision
+      </span>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MY JOURNEY
+===================================================== -->
+
+<section class="journey" id="journey">
+
+  <h2>
+    My Journey
+  </h2>
+
+
+  <p class="journey-subtitle">
+
+    I'm still a student, still learning,
+    and still figuring things out —
+    but technology changed the direction
+    of my journey.
+
+  </p>
+
+
+  <div class="timeline">
+
+
+    <div class="timeline-item">
+
+      <div class="timeline-content">
+
+        <div class="journey-year">
+
+          <i class="fas fa-circle"></i>
+
+          2023
+
+        </div>
+
+        <h3>
+          Just a Student
+        </h3>
+
+        <p>
+
+          I was simply a South African student
+          focused on finding my direction and
+          figuring out what I wanted to become.
+
+        </p>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="timeline-item">
+
+      <div class="timeline-content">
+
+        <div class="journey-year">
+
+          <i class="fas fa-bolt"></i>
+
+          2024
+
+        </div>
+
+        <h3>
+          I Fell in Love with Technology
+        </h3>
+
+        <p>
+
+          Something changed.
+
+          I discovered technology and
+          completely fell in love with it.
+
+          That was the moment I started
+          looking at my future differently.
+
+        </p>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="timeline-item">
+
+      <div class="timeline-content">
+
+        <div class="journey-year">
+
+          <i class="fas fa-code"></i>
+
+          THE BUILDING ERA
+
+        </div>
+
+        <h3>
+          From Curiosity to Code
+        </h3>
+
+        <p>
+
+          I started learning how websites
+          work, writing code, experimenting
+          with ideas, and turning what I
+          imagined into something real.
+
+        </p>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="timeline-item">
+
+      <div class="timeline-content">
+
+        <div class="journey-year">
+
+          <i class="fas fa-trophy"></i>
+
+          2025
+
+        </div>
+
+        <h3>
+          Turning Passion Into Skill
+        </h3>
+
+        <p>
+
+          I pushed myself further into
+          development and completed the
+          FNB App of the Year Full Stack
+          Development program.
+
+          What started as curiosity became
+          something I genuinely wanted to
+          build my future around.
+
+        </p>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="timeline-item current">
+
+      <div class="timeline-content">
+
+        <div class="journey-year">
+
+          <i class="fas fa-fire"></i>
+
+          2026 — NOW
+
+        </div>
+
+        <h3>
+          Still a Student. Still Leveling Up.
+        </h3>
+
+        <p>
+
+          I'm still a student, but I'm no
+          longer just dreaming about technology.
+
+          I'm building projects, sharpening
+          my coding skills, exploring
+          cybersecurity, and creating my own
+          path in tech.
+
+        </p>
+
+
+        <div class="journey-badge">
+
+          <span class="status-dot"></span>
+
+          Currently Leveling Up
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="journey-end">
+
+    <strong>
+      The journey is still being written.
+    </strong>
+
+    <p>
+
+      Student today. Builder in progress.
+      The future is mine to create.
+
+    </p>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SOUTH AFRICA TO THE WORLD
+===================================================== -->
+
+<section class="global-section">
+
+  <div class="global-content">
+
+
+    <div class="south-africa-badge">
+
+      🇿🇦
+
+    </div>
+
+
+    <h2>
+      From VHURIVHURI to the World
+    </h2>
+
+
+    <p class="global-lead">
+
+      Built in South Africa.
+      Dreaming beyond borders.
+
+    </p>
+
+
+    <p class="global-text">
+
+      I'm building my skills,
+      projects, and ideas from
+      South Africa with the goal
+      of creating something that
+      can reach people anywhere
+      in the world.
+
+    </p>
+
+
+    <div class="global-route">
+
+
+      <div class="route-point active">
+
+        <span class="route-dot"></span>
+
+        <strong>
+          VHURIVHURI
+        </strong>
+
+        <small>
+          Where it started
+        </small>
+
+      </div>
+
+
+      <div class="route-line"></div>
+
+
+      <div class="route-point">
+
+        <span class="route-dot"></span>
+
+        <strong>
+          South Africa
+        </strong>
+
+        <small>
+          Where we grow
+        </small>
+
+      </div>
+
+
+      <div class="route-line"></div>
+
+
+      <div class="route-point">
+
+        <span class="route-dot"></span>
+
+        <strong>
+          The World
+        </strong>
+
+        <small>
+          Where we're going
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="global-quote">
+
+      <i class="fas fa-quote-left"></i>
+
+      <span>
+        Think local. Build global.
+      </span>
+
+      <i class="fas fa-quote-right"></i>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CONTACT
+===================================================== -->
+
+<section
+  class="contact"
+  id="contact"
+>
+
+  <h2>
+    Contact Me
+  </h2>
+
+
+  <form
+    id="contactForm"
+    action="https://formsubmit.co/nisinkhangwe@gmail.com"
+    method="POST"
+  >
+
+  <input type="hidden" name="_next"    value="https://mr-gotham.github.io/webpage/">
+
+    <input
+      type="text"
+      name="name"
+      placeholder="Your Name"
+      required
+    >
+
+
+    <input
+      type="email"
+      name="email"
+      placeholder="Your Email"
+      required
+    >
+
+
+    <textarea
+      name="message"
+      placeholder="Your Message..."
+      rows="6"
+      required
+    ></textarea>
+
+
+    <button type="submit">
+
+      <i class="fas fa-paper-plane"></i>
+
+      Send Message
+
+    </button>
+
+  </form>
+
+</section>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     THEME TOGGLE
+===================================================== -->
+
+<div id="themeToggle">
+
+  <i class="fas fa-moon"></i>
+
+</div>
+
+
+
+<!-- =====================================================
+     BACK TO TOP
+===================================================== -->
+
+<div
+  id="backToTop"
+  aria-label="Back to top"
+>
+
+  ↑
+
+</div>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer id="footer"></footer>
+
+
+
+<script>
+
+/* =========================================================
+   MATRIX DIGITAL RAIN
+========================================================= */
+
+const matrixCanvas =
+  document.getElementById("matrixCanvas");
+
+const matrixCtx =
+  matrixCanvas.getContext("2d");
+
+let matrixWidth;
+let matrixHeight;
+let matrixColumns;
+let matrixDrops;
+
+const matrixChars =
+  "アカサタナハマヤラワ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ<>/{}[]$#@%";
+
+
+function resizeMatrix() {
+
+  matrixWidth =
+    matrixCanvas.width =
+    window.innerWidth;
+
+  matrixHeight =
+    matrixCanvas.height =
+    window.innerHeight;
+
+  const fontSize = 15;
+
+  matrixColumns =
+    Math.floor(
+      matrixWidth / fontSize
+    );
+
+  matrixDrops =
+    Array(matrixColumns)
+      .fill(1);
+}
+
+
+resizeMatrix();
+
+
+window.addEventListener(
+  "resize",
+  resizeMatrix
+);
+
+
+function drawMatrix() {
+
+  matrixCtx.fillStyle =
+    "rgba(0, 0, 0, 0.055)";
+
+  matrixCtx.fillRect(
+    0,
+    0,
+    matrixWidth,
+    matrixHeight
+  );
+
+  const fontSize = 15;
+
+  matrixCtx.font =
+    fontSize + "px monospace";
+
+  matrixCtx.fillStyle =
+    "#00ff99";
+
+
+  for (
+    let i = 0;
+    i < matrixDrops.length;
+    i++
+  ) {
+
+    const character =
+      matrixChars[
+        Math.floor(
+          Math.random() *
+          matrixChars.length
+        )
+      ];
+
+
+    matrixCtx.fillText(
+      character,
+      i * fontSize,
+      matrixDrops[i] * fontSize
+    );
+
+
+    if (
+      matrixDrops[i] * fontSize >
+      matrixHeight &&
+      Math.random() > .975
+    ) {
+      matrixDrops[i] = 0;
+    }
+
+
+    matrixDrops[i]++;
+  }
+}
+
+
+setInterval(
+  drawMatrix,
+  45
+);
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+document.getElementById("footer").innerHTML =
+
+`© ${new Date().getFullYear()} Niisie · Level Up • Personal Profile
+<br>
+<small>
+Last Updated: August 2026
+</small>`;
+
+
+/* =========================================================
+   TYPING EFFECT
+========================================================= */
+
+const typingText =
+  document.getElementById("typingText");
+
+const words = [
+  "Developer",
+  "Creator",
+  "Student",
+  "Chess Player",
+  "Football Fan",
+  "Future Ethical Hacker"
+  
+];
+
+let wordIndex = 0;
+let charIndex = 0;
+let deleting = false;
+
+
+function typeEffect() {
+
+  const currentWord =
+    words[wordIndex];
+
+
+  if (!deleting) {
+
+    typingText.textContent =
+      currentWord.substring(
+        0,
+        charIndex + 1
+      );
+
+    charIndex++;
+
+
+    if (
+      charIndex ===
+      currentWord.length
+    ) {
+
+      deleting = true;
+
+      setTimeout(
+        typeEffect,
+        1800
+      );
+
+      return;
+    }
+
+  } else {
+
+    typingText.textContent =
+      currentWord.substring(
+        0,
+        charIndex - 1
+      );
+
+    charIndex--;
+
+
+    if (charIndex === 0) {
+
+      deleting = false;
+
+      wordIndex =
+        (wordIndex + 1)
+        % words.length;
+    }
+  }
+
+
+  setTimeout(
+    typeEffect,
+    deleting ? 45 : 90
+  );
+}
+
+
+typeEffect();
+
+
+/* =========================================================
+   SCROLL REVEAL ENGINE
+========================================================= */
+
+const revealElements =
+  document.querySelectorAll(
+    ".skill-item, .brilliancy-card, .about, .global-section, .journey-end"
+  );
+
+
+const revealObserver =
+  new IntersectionObserver(
+
+    entries => {
+
+      entries.forEach(entry => {
+
+        if (
+          entry.isIntersecting
+        ) {
+
+          entry.target.classList.add(
+            "reveal"
+          );
+
+          entry.target.classList.add(
+            "visible"
+          );
+
+          revealObserver.unobserve(
+            entry.target
+          );
+        }
+
+      });
+
+    },
+
+    {
+      threshold: .12,
+      rootMargin: "0px 0px -50px 0px"
+    }
+  );
+
+
+revealElements.forEach(
+  element => {
+
+    if (
+      element.classList.contains(
+        "skill-item"
+      ) ||
+      element.classList.contains(
+        "brilliancy-card"
+      )
+    ) {
+
+      revealObserver.observe(
+        element
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   LIQUID SKILL BARS
+========================================================= */
+
+function animateProgressBars() {
+
+  document
+    .querySelectorAll(".progress")
+    .forEach(bar => {
+
+      bar.style.width =
+        bar.getAttribute(
+          "data-width"
+        ) + "%";
+
+    });
+}
+
+
+const skillsSection =
+  document.querySelector(".skills");
+
+
+const skillsObserver =
+  new IntersectionObserver(
+
+    entries => {
+
+      entries.forEach(entry => {
+
+        if (
+          entry.isIntersecting
+        ) {
+
+          animateProgressBars();
+
+          skillsObserver.unobserve(
+            entry.target
+          );
+        }
+
+      });
+
+    },
+
+    {
+      threshold: .2
+    }
+  );
+
+
+skillsObserver.observe(
+  skillsSection
+);
+
+
+/* =========================================================
+   THEME TOGGLE
+========================================================= */
+
+const themeToggle =
+  document.getElementById(
+    "themeToggle"
+  );
+
+const html =
+  document.documentElement;
+
+
+const savedTheme =
+  localStorage.getItem(
+    "theme"
+  ) || "dark";
+
+
+html.setAttribute(
+  "data-theme",
+  savedTheme
+);
+
+
+updateThemeIcon(
+  savedTheme
+);
+
+
+themeToggle.addEventListener(
+  "click",
+  () => {
+
+    const current =
+      html.getAttribute(
+        "data-theme"
+      );
+
+
+    const newTheme =
+      current === "light"
+        ? "dark"
+        : "light";
+
+
+    html.setAttribute(
+      "data-theme",
+      newTheme
+    );
+
+
+    localStorage.setItem(
+      "theme",
+      newTheme
+    );
+
+
+    updateThemeIcon(
+      newTheme
+    );
+
+  }
+);
+
+
+function updateThemeIcon(theme) {
+
+  themeToggle.innerHTML =
+    theme === "light"
+
+      ? '<i class="fas fa-moon"></i>'
+
+      : '<i class="fas fa-sun"></i>';
+}
+
+
+/* =========================================================
+   HERO IMAGE ROTATION
+========================================================= */
+
+const heroImages = [
+
+  "images/nisie.jpg",
+  "images/1.jpg",
+  "images/2.jpg",
+  "images/3.jpg",
+  "images/4.jpg",
+  
+  
+
+];
+
+
+let imgIndex = 0;
+
+
+const heroImg =
+  document.getElementById(
+    "heroImg"
+  );
+
+
+function changeImage() {
+
+  heroImg.style.opacity =
+    "0";
+
+
+  setTimeout(() => {
+
+    imgIndex =
+      (imgIndex + 1)
+      % heroImages.length;
+
+
+    heroImg.src =
+      heroImages[imgIndex];
+
+
+    heroImg.style.opacity =
+      "1";
+
+  }, 600);
+}
+
+
+setInterval(
+  changeImage,
+  7000
+);
+
+
+/* =========================================================
+   BACK TO TOP
+========================================================= */
+
+const backToTop =
+  document.getElementById(
+    "backToTop"
+  );
+
+
+window.addEventListener(
+  "scroll",
+  () => {
+
+    if (
+      window.scrollY > 400
+    ) {
+
+      backToTop.style.display =
+        "flex";
+
+    } else {
+
+      backToTop.style.display =
+        "none";
+    }
+
+  },
+  { passive: true }
+);
+
+
+backToTop.addEventListener(
+  "click",
+  () => {
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+);
+
+
+/* =========================================================
+   CONTACT FORM FEEDBACK
+========================================================= */
+
+const contactForm =
+  document.getElementById(
+    "contactForm"
+  );
+
+
+contactForm.addEventListener(
+  "submit",
+  () => {
+
+    const button =
+      contactForm.querySelector(
+        "button"
+      );
+
+
+    button.innerHTML =
+      '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+  }
+);
+
+
+/* =========================================================
+   SMOOTH ANCHOR HANDLING
+========================================================= */
+
+document
+  .querySelectorAll(
+    'a[href^="#"]'
+  )
+  .forEach(link => {
+
+    link.addEventListener(
+      "click",
+      event => {
+
+        const href =
+          link.getAttribute(
+            "href"
+          );
+
+
+        if (
+          !href ||
+          href === "#"
+        ) {
+          return;
+        }
+
+
+        const target =
+          document.querySelector(
+            href
+          );
+
+
+        if (target) {
+
+          event.preventDefault();
+
+
+          target.scrollIntoView({
+
+            behavior:
+              "smooth",
+
+            block:
+              "start"
+
+          });
+
+        }
+
+      }
+    );
+
+  });
+
+
+/* =========================================================
+   CARD TOUCH FEEDBACK
+   Helps mobile cards feel responsive
+========================================================= */
+
+document
+  .querySelectorAll(
+    ".skill-item, .brilliancy-card"
+  )
+  .forEach(card => {
+
+    card.addEventListener(
+      "touchstart",
+      () => {
+
+        card.style.transition =
+          "transform .2s ease";
+
+      },
+      { passive: true }
+    );
+
+  });
+
+
+/* =========================================================
+   PREVENT SCROLL LOCKING
+========================================================= */
+
+document.body.style.overflowX =
+  "hidden";
+
+
+/* =========================================================
+   PAGE LOAD
+========================================================= */
+
+window.addEventListener(
+  "load",
+  () => {
+
+    document.body.classList.add(
+      "page-loaded"
+    );
+
+  }
+);
+
+</script>
+
+</body>
+</html>
